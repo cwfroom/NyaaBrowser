@@ -10,10 +10,14 @@ using System.Windows.Forms;
 
 namespace NyaaBrowser
 {
+
     public partial class MainScr : Form
     {
-        public MainScr()
+        private Client c;
+
+        public MainScr(Client c)
         {
+            this.c = c;
             InitializeComponent();
         }
 
@@ -21,5 +25,26 @@ namespace NyaaBrowser
         {
 
         }
+
+        private void sukebeiCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void customizeBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (customizeBox.Checked)
+            {
+                customizeText.Enabled = true;
+                titleBox.Enabled = false;
+
+            }
+            else
+            {
+                customizeText.Enabled = false;
+                titleBox.Enabled = true;
+            }
+        }
+
     }
 }

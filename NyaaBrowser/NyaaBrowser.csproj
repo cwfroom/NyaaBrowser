@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
+    <Compile Include="Search.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="MainScr.cs">
       <SubType>Form</SubType>
     </Compile>
