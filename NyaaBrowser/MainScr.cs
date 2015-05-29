@@ -21,14 +21,29 @@ namespace NyaaBrowser
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainSrc_Load(object sender, EventArgs e)
         {
-
+            //load data to combo box
+            this.categoryBox.Items.AddRange(c.data.normalCategories);
+            this.categoryBox.SelectedIndex = 0;
         }
 
         private void sukebeiCheck_CheckedChanged(object sender, EventArgs e)
         {
-            
+            //switch content of combo boxes
+            this.categoryBox.Items.Clear();
+            this.providerBox.Items.Clear();
+
+            if (!sukebeiCheck.Checked)
+            {
+                this.categoryBox.Items.AddRange(c.data.normalCategories);
+                this.categoryBox.SelectedIndex = 0;
+            }
+            else
+            {
+                this.categoryBox.Items.AddRange(c.data.sukebeiCategories);
+                this.categoryBox.SelectedIndex = 0;
+            }
         }
 
         private void customizeBox_CheckedChanged(object sender, EventArgs e)

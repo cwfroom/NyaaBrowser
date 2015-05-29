@@ -35,20 +35,20 @@
             this.preferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterGroupBox = new System.Windows.Forms.GroupBox();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.customizeText = new System.Windows.Forms.TextBox();
+            this.customizeBox = new System.Windows.Forms.CheckBox();
+            this.timeLabelAfter = new System.Windows.Forms.Label();
             this.timeText = new System.Windows.Forms.TextBox();
             this.timeLabel = new System.Windows.Forms.Label();
             this.titleEditButton = new System.Windows.Forms.Button();
             this.titleLabel = new System.Windows.Forms.Label();
             this.titleBox = new System.Windows.Forms.ComboBox();
             this.providerEditButton = new System.Windows.Forms.Button();
-            this.catagoryLabel = new System.Windows.Forms.Label();
-            this.catagoryBox = new System.Windows.Forms.ComboBox();
+            this.categoryLabel = new System.Windows.Forms.Label();
+            this.categoryBox = new System.Windows.Forms.ComboBox();
             this.providerLabel = new System.Windows.Forms.Label();
             this.providerBox = new System.Windows.Forms.ComboBox();
-            this.timeLabelAfter = new System.Windows.Forms.Label();
-            this.customizeBox = new System.Windows.Forms.CheckBox();
-            this.customizeText = new System.Windows.Forms.TextBox();
-            this.searchButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.filterGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -106,8 +106,8 @@
             this.filterGroupBox.Controls.Add(this.titleLabel);
             this.filterGroupBox.Controls.Add(this.titleBox);
             this.filterGroupBox.Controls.Add(this.providerEditButton);
-            this.filterGroupBox.Controls.Add(this.catagoryLabel);
-            this.filterGroupBox.Controls.Add(this.catagoryBox);
+            this.filterGroupBox.Controls.Add(this.categoryLabel);
+            this.filterGroupBox.Controls.Add(this.categoryBox);
             this.filterGroupBox.Controls.Add(this.providerLabel);
             this.filterGroupBox.Controls.Add(this.providerBox);
             this.filterGroupBox.Controls.Add(this.sukebeiCheck);
@@ -118,18 +118,55 @@
             this.filterGroupBox.TabStop = false;
             this.filterGroupBox.Text = "Filters";
             // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(637, 45);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(55, 42);
+            this.searchButton.TabIndex = 14;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            // 
+            // customizeText
+            // 
+            this.customizeText.Enabled = false;
+            this.customizeText.Location = new System.Drawing.Point(205, 67);
+            this.customizeText.Name = "customizeText";
+            this.customizeText.Size = new System.Drawing.Size(425, 20);
+            this.customizeText.TabIndex = 13;
+            // 
+            // customizeBox
+            // 
+            this.customizeBox.AutoSize = true;
+            this.customizeBox.Location = new System.Drawing.Point(81, 70);
+            this.customizeBox.Name = "customizeBox";
+            this.customizeBox.Size = new System.Drawing.Size(118, 17);
+            this.customizeBox.TabIndex = 12;
+            this.customizeBox.Text = "Customize Keyword";
+            this.customizeBox.UseVisualStyleBackColor = true;
+            this.customizeBox.CheckedChanged += new System.EventHandler(this.customizeBox_CheckedChanged);
+            // 
+            // timeLabelAfter
+            // 
+            this.timeLabelAfter.AutoSize = true;
+            this.timeLabelAfter.Location = new System.Drawing.Point(508, 45);
+            this.timeLabelAfter.Name = "timeLabelAfter";
+            this.timeLabelAfter.Size = new System.Drawing.Size(117, 13);
+            this.timeLabelAfter.TabIndex = 11;
+            this.timeLabelAfter.Text = "days (0 for unrestricted)";
+            // 
             // timeText
             // 
-            this.timeText.Location = new System.Drawing.Point(430, 41);
+            this.timeText.Location = new System.Drawing.Point(478, 41);
             this.timeText.Name = "timeText";
-            this.timeText.Size = new System.Drawing.Size(74, 20);
+            this.timeText.Size = new System.Drawing.Size(27, 20);
             this.timeText.TabIndex = 10;
             this.timeText.Text = "0";
             // 
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(393, 45);
+            this.timeLabel.Location = new System.Drawing.Point(441, 45);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(33, 13);
             this.timeLabel.TabIndex = 9;
@@ -137,7 +174,7 @@
             // 
             // titleEditButton
             // 
-            this.titleEditButton.Location = new System.Drawing.Point(318, 40);
+            this.titleEditButton.Location = new System.Drawing.Point(376, 40);
             this.titleEditButton.Name = "titleEditButton";
             this.titleEditButton.Size = new System.Drawing.Size(56, 21);
             this.titleEditButton.TabIndex = 8;
@@ -155,10 +192,11 @@
             // 
             // titleBox
             // 
+            this.titleBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.titleBox.FormattingEnabled = true;
             this.titleBox.Location = new System.Drawing.Point(111, 40);
             this.titleBox.Name = "titleBox";
-            this.titleBox.Size = new System.Drawing.Size(200, 21);
+            this.titleBox.Size = new System.Drawing.Size(259, 21);
             this.titleBox.TabIndex = 6;
             // 
             // providerEditButton
@@ -170,27 +208,28 @@
             this.providerEditButton.Text = "Edit";
             this.providerEditButton.UseVisualStyleBackColor = true;
             // 
-            // catagoryLabel
+            // categoryLabel
             // 
-            this.catagoryLabel.AutoSize = true;
-            this.catagoryLabel.Location = new System.Drawing.Point(112, 20);
-            this.catagoryLabel.Name = "catagoryLabel";
-            this.catagoryLabel.Size = new System.Drawing.Size(52, 13);
-            this.catagoryLabel.TabIndex = 4;
-            this.catagoryLabel.Text = "Catagory:";
+            this.categoryLabel.AutoSize = true;
+            this.categoryLabel.Location = new System.Drawing.Point(112, 20);
+            this.categoryLabel.Name = "categoryLabel";
+            this.categoryLabel.Size = new System.Drawing.Size(52, 13);
+            this.categoryLabel.TabIndex = 4;
+            this.categoryLabel.Text = "Category:";
             // 
-            // catagoryBox
+            // categoryBox
             // 
-            this.catagoryBox.FormattingEnabled = true;
-            this.catagoryBox.Location = new System.Drawing.Point(164, 15);
-            this.catagoryBox.Name = "catagoryBox";
-            this.catagoryBox.Size = new System.Drawing.Size(200, 21);
-            this.catagoryBox.TabIndex = 3;
+            this.categoryBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.categoryBox.FormattingEnabled = true;
+            this.categoryBox.Location = new System.Drawing.Point(164, 15);
+            this.categoryBox.Name = "categoryBox";
+            this.categoryBox.Size = new System.Drawing.Size(250, 21);
+            this.categoryBox.TabIndex = 3;
             // 
             // providerLabel
             // 
             this.providerLabel.AutoSize = true;
-            this.providerLabel.Location = new System.Drawing.Point(378, 20);
+            this.providerLabel.Location = new System.Drawing.Point(425, 20);
             this.providerLabel.Name = "providerLabel";
             this.providerLabel.Size = new System.Drawing.Size(49, 13);
             this.providerLabel.TabIndex = 2;
@@ -198,48 +237,12 @@
             // 
             // providerBox
             // 
+            this.providerBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.providerBox.FormattingEnabled = true;
-            this.providerBox.Location = new System.Drawing.Point(430, 15);
+            this.providerBox.Location = new System.Drawing.Point(478, 15);
             this.providerBox.Name = "providerBox";
-            this.providerBox.Size = new System.Drawing.Size(200, 21);
+            this.providerBox.Size = new System.Drawing.Size(150, 21);
             this.providerBox.TabIndex = 1;
-            // 
-            // timeLabelAfter
-            // 
-            this.timeLabelAfter.AutoSize = true;
-            this.timeLabelAfter.Location = new System.Drawing.Point(511, 45);
-            this.timeLabelAfter.Name = "timeLabelAfter";
-            this.timeLabelAfter.Size = new System.Drawing.Size(117, 13);
-            this.timeLabelAfter.TabIndex = 11;
-            this.timeLabelAfter.Text = "days (0 for unrestricted)";
-            // 
-            // customizeBox
-            // 
-            this.customizeBox.AutoSize = true;
-            this.customizeBox.Location = new System.Drawing.Point(81, 70);
-            this.customizeBox.Name = "customizeBox";
-            this.customizeBox.Size = new System.Drawing.Size(118, 17);
-            this.customizeBox.TabIndex = 12;
-            this.customizeBox.Text = "Customize Keyword";
-            this.customizeBox.UseVisualStyleBackColor = true;
-            this.customizeBox.CheckedChanged += new System.EventHandler(this.customizeBox_CheckedChanged);
-            // 
-            // customizeText
-            // 
-            this.customizeText.Enabled = false;
-            this.customizeText.Location = new System.Drawing.Point(205, 67);
-            this.customizeText.Name = "customizeText";
-            this.customizeText.Size = new System.Drawing.Size(425, 20);
-            this.customizeText.TabIndex = 13;
-            // 
-            // searchButton
-            // 
-            this.searchButton.Location = new System.Drawing.Point(637, 45);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(55, 42);
-            this.searchButton.TabIndex = 14;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
             // 
             // MainScr
             // 
@@ -255,7 +258,7 @@
             this.Name = "MainScr";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nyaa Browser";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainSrc_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.filterGroupBox.ResumeLayout(false);
@@ -275,8 +278,8 @@
         private System.Windows.Forms.Label providerLabel;
         private System.Windows.Forms.ComboBox providerBox;
         private System.Windows.Forms.Button providerEditButton;
-        private System.Windows.Forms.Label catagoryLabel;
-        private System.Windows.Forms.ComboBox catagoryBox;
+        private System.Windows.Forms.Label categoryLabel;
+        private System.Windows.Forms.ComboBox categoryBox;
         private System.Windows.Forms.Button titleEditButton;
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.ComboBox titleBox;
