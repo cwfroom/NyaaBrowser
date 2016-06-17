@@ -61,5 +61,11 @@ namespace NyaaBrowser
             }
         }
 
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            string[] parameters = new string[1];
+            parameters[0] = "h";
+            List<string> results = c.webFetch.fetch(parameters);
+        }
     }
 }

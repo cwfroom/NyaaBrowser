@@ -11,10 +11,12 @@ namespace NyaaBrowser
     {
         public MainScr mainScr;
         public Data data;
+        public WebFetch webFetch;
 
         public Client()
         {
             data = new Data();
+            webFetch = new WebFetch();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
