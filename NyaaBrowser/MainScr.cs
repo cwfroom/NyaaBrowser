@@ -32,7 +32,7 @@ namespace NyaaBrowser
         {
             //switch content of combo boxes
             this.categoryBox.Items.Clear();
-            this.providerBox.Items.Clear();
+            this.uploaderBox.Items.Clear();
 
             if (!sukebeiCheck.Checked)
             {
@@ -66,6 +66,17 @@ namespace NyaaBrowser
             string[] parameters = new string[1];
             parameters[0] = "h";
             List<string> results = c.webFetch.fetch(parameters);
+
+            for (int i = 0; i < results.Count; i+=3)
+            {
+                string[] itemStr = new string[2];
+                itemStr[0] = results[i];
+                itemStr[1] = results[i + 2];
+                ListViewItem item = new ListViewItem(itemStr);
+                resultsView.Items.Add(item);
+            }
+
+           
         }
     }
 }

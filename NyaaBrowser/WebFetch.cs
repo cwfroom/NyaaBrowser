@@ -70,9 +70,10 @@ namespace NyaaBrowser
                 {
                      if (partialStringMatch(keyword, temp[i])){
                         //save keyword
-                        //download link should be saved at keyword[+7]    
+                        //download link should be saved at [+7]
+                        //size should be at [+16]    
                         //should be be an issue if webpage is downloaded properly, just in case
-                        if (i+7 <= temp.Length)
+                        if (i+16 <= temp.Length)
                         {
                             if (partialStringMatch(downloadLink, temp[i + 7]))
                             {
@@ -80,6 +81,7 @@ namespace NyaaBrowser
                                 //TODO: parse file name and tid
                                 results.Add(htmlCodeReplace(temp[i]));
                                 results.Add(getTid(temp[i + 7]));
+                                results.Add(temp[i + 16]);
                             }
 
                         }
@@ -87,7 +89,8 @@ namespace NyaaBrowser
                     }
                 }
             }
-            
+
+            //int j = 0;
         }
 
         private bool partialStringMatch(string key, string other)
