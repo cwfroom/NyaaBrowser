@@ -42,16 +42,26 @@ namespace NyaaBrowser
             
         }
 
-        public List<string> fetch(string[] filter)
+        public List<string> fetch(string[] filters)
         {
-            // string url =  "http://www.nyaa.se/?page=search&";
+            string url =  "http://www.nyaa.se/?page=search&cats=" + filters[0] + "&filter=0";
+            if (filters[2].Length != 0)
+            {
+                url = url + "&term=" + filters[2];
+            }
+            keyword = filters[1];
+            url = url + "&user=" + filters[1];
+            
+
             WebClient webclient = new WebClient();
-            //string html = webclient.DownloadString("http://www.nyaa.se/");
-            string html = webclient.DownloadString("http://www.nyaa.se/?page=search&cats=0_0&filter=0&term=%5BOhys-Raws%5D+Macross+Delta");
+
+            byte[] htmlraw = webclient.DownloadData(url);
+            string html = Encoding.UTF8.GetString(htmlraw);
+            
+            //string html = webclient.DownloadString("http://www.nyaa.se/?page=search&cats=0_0&filter=0&term=%5BOhys-Raws%5D+Macross+Delta");
             //Console.Write(html);
 
-            keyword = "[Ohys-Raws] Macross Delta";
-
+         
             List<string> results = new List<string>();
             parsehtml(html,ref results);
 
@@ -68,17 +78,16 @@ namespace NyaaBrowser
                 //filter short strings to save time
                 if (temp[i].Length >= keyword.Length || temp[i].Length >= downloadLink.Length)
                 {
-                     if (partialStringMatch(keyword, temp[i])){
+                     if (temp[i].Contains(keyword)){
                         //save keyword
                         //download link should be saved at [+7]
                         //size should be at [+16]    
-                        //should be be an issue if webpage is downloaded properly, just in case
+                        //should not be an issue if webpage is downloaded properly, just in case
                         if (i+16 <= temp.Length)
                         {
-                            if (partialStringMatch(downloadLink, temp[i + 7]))
+                            if(temp[i+7].Contains(downloadLink))
                             {
                                 //download link matched
-                                //TODO: parse file name and tid
                                 results.Add(htmlCodeReplace(temp[i]));
                                 results.Add(getTid(temp[i + 7]));
                                 results.Add(temp[i + 16]);
@@ -90,20 +99,8 @@ namespace NyaaBrowser
                 }
             }
 
-            //int j = 0;
         }
 
-        private bool partialStringMatch(string key, string other)
-        {
-            for (int i=0;i<key.Length;i++)
-            {
-                if (key[i] != other[i])
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
 
         private string htmlCodeReplace(string str)
         {

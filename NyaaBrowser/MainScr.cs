@@ -32,7 +32,8 @@ namespace NyaaBrowser
         {
             //switch content of combo boxes
             this.categoryBox.Items.Clear();
-            this.uploaderBox.Items.Clear();
+            this.titleBox.Clear();
+            this.uploaderBox.Clear();
 
             if (!sukebeiCheck.Checked)
             {
@@ -63,9 +64,15 @@ namespace NyaaBrowser
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            string[] parameters = new string[1];
-            parameters[0] = "h";
-            List<string> results = c.webFetch.fetch(parameters);
+            string[] filters = new string[3];
+            //catagory
+            filters[0] = c.data.categoryCode(categoryBox.SelectedText);
+            //uploader
+            filters[1] = uploaderBox.Text;
+            //title
+            filters[2] = titleBox.Text;
+             
+            List<string> results = c.webFetch.fetch(filters);
 
             for (int i = 0; i < results.Count; i+=3)
             {

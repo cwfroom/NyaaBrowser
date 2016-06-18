@@ -10,13 +10,48 @@ namespace NyaaBrowser
     public class Data
     {
         public bool isSukebei;
+        Dictionary<string, string> CategoryDic;
         public string[] normalCategories;
         public string[] sukebeiCategories;
 
         public Data()
         {
             isSukebei = false;
-            
+            //generate category dictionary
+            CategoryDic = new Dictionary<string, string>();
+            CategoryDic.Add("All categories", "0_0");
+            CategoryDic.Add("Anime", "1_0");
+            CategoryDic.Add("Anime - Anime Music Video", "1_32");
+            CategoryDic.Add("Anime - English-translated Anime", "1_37");
+            CategoryDic.Add("Anime - Non-English-translated Anime", "1_38");
+            CategoryDic.Add("Anime - Raw Anime", "1_11");
+            CategoryDic.Add("Audio", "3_0");
+            CategoryDic.Add("Audio - Lossless Audio", "3_14");
+            CategoryDic.Add("Audio - Lossy Audio", "3_15");
+            CategoryDic.Add("Literature", "2_0");
+            CategoryDic.Add("Literature - English-translated Literature", "2_12");
+            CategoryDic.Add("Literature - Non-English-translated Literature", "2_39");
+            CategoryDic.Add("Literature - Raw Literature", "2_13");
+            CategoryDic.Add("Live Action", "5_0");
+            CategoryDic.Add("Live Action - English-translated Live Action", "5_19");
+            CategoryDic.Add("Live Action - Live Action Promotional Video", "5_22");
+            CategoryDic.Add("Live Action - Non-English-translated Live Action", "5_21");
+            CategoryDic.Add("Live Action - Raw Live Action", "5_22");
+            CategoryDic.Add("Pictures", "4_0");
+            CategoryDic.Add("Pictures - Graphics", "4_18");
+            CategoryDic.Add("Pictures - Photos", "4_17");
+            CategoryDic.Add("Software", "6_0");
+            CategoryDic.Add("Software - Applications", "6_23");
+            CategoryDic.Add("Software - Games", "6_24");
+            CategoryDic.Add("Art", "7_0");
+            CategoryDic.Add("Art - Anime", "7_25");
+            CategoryDic.Add("Art - Doujinshi", "7_33");
+            CategoryDic.Add("Art - Games", "7_27");
+            CategoryDic.Add("Art - Pictures", "7_26");
+            CategoryDic.Add("Real Life", "8_0");
+            CategoryDic.Add("Real Life - Photobooks & Pictures", "8_31");
+            CategoryDic.Add("Real Life - Videos", "8_30");
+
             //default catagory values
             normalCategories = new string[]{"All categories",
                                             "Anime",
@@ -59,75 +94,9 @@ namespace NyaaBrowser
 
         public string categoryCode(string category)
         {
-            switch (category)
-            {
-                case "All categories":
-                    return "0_0";
-                case "Anime":
-                    return "1_0";
-                case "Anime - Anime Music Video":
-                    return "1_32";
-                case "Anime - English-translated Anime":
-                    return "1_37";
-                case "Anime - Non-English-translated Anime":
-                    return "1_38";
-                case "Anime - Raw Anime":
-                    return "1_11";
-                case "Audio":
-                    return "3_0";
-                case "Audio - Lossless Audio":
-                    return "3_14";
-                case "Audio - Lossy Audio":
-                    return "3_15";
-                case "Literature":
-                    return "2_0";
-                case "Literature - English-translated Literature":
-                    return "2_12";
-                case "Literature - Non-English-translated Literature":
-                    return "2_39";
-                case "Literature - Raw Literature":
-                    return "2_13";
-                case "Live Action":
-                    return "5_0";
-                case "Live Action - English-translated Live Action":
-                    return "5_19";
-                case "Live Action - Live Action Promotional Video":
-                    return "5_22";
-                case "Live Action - Non-English-translated Live Action":
-                    return "5_21";
-                case "Live Action - Raw Live Action":
-                    return "5_20";
-                case "Pictures":
-                    return "4_0";
-                case "Pictures - Graphics":
-                    return "4_18";
-                case "Pictures - Photos":
-                    return "4_17";
-                case "Software":
-                    return "6_0";
-                case "Software - Applications":
-                    return "6_23";
-                case "Software - Games":
-                    return "6_24";
-                case "Art":
-                    return "7_0";
-                case "Art - Anime":
-                    return "7_25";
-                case "Art - Doujinshi":
-                    return "7_33";
-                case "Art - Games":
-                    return "7_27";
-                case "Art - Pictures":
-                    return "7_26";
-                case  "Real Life":
-                    return "8_0";
-                case "Real Life - Photobooks & Pictures":
-                    return "8_31";
-                case "Real Life - Videos":
-                    return "8_30";
-                default:
-                    return null;
-            }
+            string result;
+            CategoryDic.TryGetValue(category, out result);
+            return result;
             
        }
         

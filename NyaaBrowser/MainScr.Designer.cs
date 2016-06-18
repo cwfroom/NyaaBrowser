@@ -43,16 +43,17 @@
             this.timeLabel = new System.Windows.Forms.Label();
             this.titleEditButton = new System.Windows.Forms.Button();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.titleBox = new System.Windows.Forms.ComboBox();
+            this.titleBox = new System.Windows.Forms.TextBox();
             this.providerEditButton = new System.Windows.Forms.Button();
             this.categoryLabel = new System.Windows.Forms.Label();
             this.categoryBox = new System.Windows.Forms.ComboBox();
             this.uploaderLabel = new System.Windows.Forms.Label();
-            this.uploaderBox = new System.Windows.Forms.ComboBox();
+            this.uploaderBox = new System.Windows.Forms.TextBox();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
             this.resultsView = new System.Windows.Forms.ListView();
             this.fileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.downloadButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.filterGroupBox.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
@@ -157,7 +158,7 @@
             // timeLabelAfter
             // 
             this.timeLabelAfter.AutoSize = true;
-            this.timeLabelAfter.Location = new System.Drawing.Point(568, 48);
+            this.timeLabelAfter.Location = new System.Drawing.Point(608, 54);
             this.timeLabelAfter.Name = "timeLabelAfter";
             this.timeLabelAfter.Size = new System.Drawing.Size(146, 16);
             this.timeLabelAfter.TabIndex = 11;
@@ -165,7 +166,7 @@
             // 
             // timeText
             // 
-            this.timeText.Location = new System.Drawing.Point(536, 43);
+            this.timeText.Location = new System.Drawing.Point(575, 51);
             this.timeText.Name = "timeText";
             this.timeText.Size = new System.Drawing.Size(27, 22);
             this.timeText.TabIndex = 10;
@@ -174,7 +175,7 @@
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(488, 48);
+            this.timeLabel.Location = new System.Drawing.Point(527, 53);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(42, 16);
             this.timeLabel.TabIndex = 9;
@@ -182,7 +183,7 @@
             // 
             // titleEditButton
             // 
-            this.titleEditButton.Location = new System.Drawing.Point(417, 43);
+            this.titleEditButton.Location = new System.Drawing.Point(456, 46);
             this.titleEditButton.Name = "titleEditButton";
             this.titleEditButton.Size = new System.Drawing.Size(65, 26);
             this.titleEditButton.TabIndex = 8;
@@ -192,7 +193,7 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Location = new System.Drawing.Point(12, 48);
+            this.titleLabel.Location = new System.Drawing.Point(12, 51);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(37, 16);
             this.titleLabel.TabIndex = 7;
@@ -200,16 +201,18 @@
             // 
             // titleBox
             // 
-            this.titleBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.titleBox.FormattingEnabled = true;
-            this.titleBox.Location = new System.Drawing.Point(55, 45);
+            this.titleBox.AutoCompleteCustomSource.AddRange(new string[] {
+            "Gochuumon wa Usagi Desu ka"});
+            this.titleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.titleBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.titleBox.Location = new System.Drawing.Point(55, 48);
             this.titleBox.Name = "titleBox";
-            this.titleBox.Size = new System.Drawing.Size(356, 24);
+            this.titleBox.Size = new System.Drawing.Size(395, 22);
             this.titleBox.TabIndex = 6;
             // 
             // providerEditButton
             // 
-            this.providerEditButton.Location = new System.Drawing.Point(647, 15);
+            this.providerEditButton.Location = new System.Drawing.Point(687, 15);
             this.providerEditButton.Name = "providerEditButton";
             this.providerEditButton.Size = new System.Drawing.Size(67, 26);
             this.providerEditButton.TabIndex = 5;
@@ -233,13 +236,13 @@
             this.categoryBox.FormattingEnabled = true;
             this.categoryBox.Location = new System.Drawing.Point(161, 15);
             this.categoryBox.Name = "categoryBox";
-            this.categoryBox.Size = new System.Drawing.Size(250, 24);
+            this.categoryBox.Size = new System.Drawing.Size(311, 24);
             this.categoryBox.TabIndex = 3;
             // 
             // uploaderLabel
             // 
             this.uploaderLabel.AutoSize = true;
-            this.uploaderLabel.Location = new System.Drawing.Point(417, 18);
+            this.uploaderLabel.Location = new System.Drawing.Point(478, 19);
             this.uploaderLabel.Name = "uploaderLabel";
             this.uploaderLabel.Size = new System.Drawing.Size(68, 16);
             this.uploaderLabel.TabIndex = 2;
@@ -247,20 +250,23 @@
             // 
             // uploaderBox
             // 
-            this.uploaderBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.uploaderBox.FormattingEnabled = true;
-            this.uploaderBox.Location = new System.Drawing.Point(491, 15);
+            this.uploaderBox.AutoCompleteCustomSource.AddRange(new string[] {
+            "ohys"});
+            this.uploaderBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.uploaderBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.uploaderBox.Location = new System.Drawing.Point(552, 15);
             this.uploaderBox.Name = "uploaderBox";
-            this.uploaderBox.Size = new System.Drawing.Size(150, 24);
+            this.uploaderBox.Size = new System.Drawing.Size(129, 22);
             this.uploaderBox.TabIndex = 1;
             // 
             // resultsGroupBox
             // 
+            this.resultsGroupBox.Controls.Add(this.downloadButton);
             this.resultsGroupBox.Controls.Add(this.resultsView);
             this.resultsGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resultsGroupBox.Location = new System.Drawing.Point(12, 151);
             this.resultsGroupBox.Name = "resultsGroupBox";
-            this.resultsGroupBox.Size = new System.Drawing.Size(760, 374);
+            this.resultsGroupBox.Size = new System.Drawing.Size(760, 398);
             this.resultsGroupBox.TabIndex = 3;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results";
@@ -277,7 +283,7 @@
             this.resultsView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.resultsView.Location = new System.Drawing.Point(6, 19);
             this.resultsView.Name = "resultsView";
-            this.resultsView.Size = new System.Drawing.Size(748, 367);
+            this.resultsView.Size = new System.Drawing.Size(748, 342);
             this.resultsView.TabIndex = 1;
             this.resultsView.UseCompatibleStateImageBehavior = false;
             this.resultsView.View = System.Windows.Forms.View.Details;
@@ -291,6 +297,15 @@
             // 
             this.fileSize.Text = "File Size";
             this.fileSize.Width = 90;
+            // 
+            // downloadButton
+            // 
+            this.downloadButton.Location = new System.Drawing.Point(313, 367);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(86, 23);
+            this.downloadButton.TabIndex = 2;
+            this.downloadButton.Text = "Download";
+            this.downloadButton.UseVisualStyleBackColor = true;
             // 
             // MainScr
             // 
@@ -326,13 +341,13 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.GroupBox filterGroupBox;
         private System.Windows.Forms.Label uploaderLabel;
-        private System.Windows.Forms.ComboBox uploaderBox;
+        private System.Windows.Forms.TextBox uploaderBox;
         private System.Windows.Forms.Button providerEditButton;
         private System.Windows.Forms.Label categoryLabel;
         private System.Windows.Forms.ComboBox categoryBox;
         private System.Windows.Forms.Button titleEditButton;
         private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.ComboBox titleBox;
+        private System.Windows.Forms.TextBox titleBox;
         private System.Windows.Forms.TextBox timeText;
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.Label timeLabelAfter;
@@ -343,6 +358,7 @@
         private System.Windows.Forms.ListView resultsView;
         private System.Windows.Forms.ColumnHeader fileName;
         protected internal System.Windows.Forms.ColumnHeader fileSize;
+        private System.Windows.Forms.Button downloadButton;
     }
 }
 
