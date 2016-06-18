@@ -42,14 +42,23 @@ namespace NyaaBrowser
             
         }
 
-        public List<string> fetch(string[] filters)
+        public List<string> fetch(string[] filters, bool isSukebei)
         {
-            string url =  "http://www.nyaa.se/?page=search&cats=" + filters[0] + "&filter=0";
+            string url;
+            if (!isSukebei)
+            {
+                url = "http://www.nyaa.se/?page=search&cats=" + filters[0] + "&filter=0";
+            }else
+            {
+                url = "http://sukebei.nyaa.se/?page=search&cats=" + filters[0] + "&filter=0";
+            }
+
+            
             if (filters[2].Length != 0)
             {
                 url = url + "&term=" + filters[2];
             }
-            keyword = filters[1];
+            keyword = filters[2];
             url = url + "&user=" + filters[1];
 
             Console.WriteLine(url);
@@ -59,22 +68,26 @@ namespace NyaaBrowser
             byte[] htmlraw = webclient.DownloadData(url);
             string html = Encoding.UTF8.GetString(htmlraw);
             
-            //string html = webclient.DownloadString("http://www.nyaa.se/?page=search&cats=0_0&filter=0&term=%5BOhys-Raws%5D+Macross+Delta");
-            //Console.Write(html);
-
-         
             List<string> results = new List<string>();
-            parsehtml(html,ref results);
+            parsehtml(html,isSukebei,ref results);
 
             return results;
           }
 
-        public void parsehtml(string source, ref List<string> results)
+        public void parsehtml(string source, bool isSukebei, ref List<string> results)
         {
             char[] separatingTags = {'<', '>'};
 
             string[] temp = source.Split(separatingTags);
-            string downloadLink = "a href=\"//www.nyaa.se/?page=download";
+            string downloadLink;
+            if (!isSukebei)
+            {
+                downloadLink = "a href=\"//www.nyaa.se/?page=download";
+            }else
+            {
+                downloadLink = "a href=\"//sukebei.nyaa.se/?page=download";
+            }
+            
             for(int i=0;i<temp.Length;i++){
                 //filter short strings to save time
                 if (temp[i].Length >= keyword.Length || temp[i].Length >= downloadLink.Length)

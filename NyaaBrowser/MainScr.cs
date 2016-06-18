@@ -75,7 +75,7 @@ namespace NyaaBrowser
             //title
             filters[2] = titleBox.Text;
              
-            List<string> results = c.webFetch.fetch(filters);
+            List<string> results = c.webFetch.fetch(filters,sukebeiCheck.Checked);
 
             for (int i = 0; i < results.Count; i+=3)
             {
