@@ -90,6 +90,9 @@ namespace NyaaBrowser
                                              "Real Life - Videos"
                                             };
             //load files
+
+            
+
         }
 
         public string categoryCode(string category)

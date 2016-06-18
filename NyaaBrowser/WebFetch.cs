@@ -51,7 +51,8 @@ namespace NyaaBrowser
             }
             keyword = filters[1];
             url = url + "&user=" + filters[1];
-            
+
+            Console.WriteLine(url);
 
             WebClient webclient = new WebClient();
 

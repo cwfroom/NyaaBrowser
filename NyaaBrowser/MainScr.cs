@@ -64,9 +64,12 @@ namespace NyaaBrowser
 
         private void searchButton_Click(object sender, EventArgs e)
         {
+            //clear previous result
+            resultsView.Items.Clear();
+
             string[] filters = new string[3];
             //catagory
-            filters[0] = c.data.categoryCode(categoryBox.SelectedText);
+            filters[0] = c.data.categoryCode(categoryBox.SelectedItem.ToString());
             //uploader
             filters[1] = uploaderBox.Text;
             //title
