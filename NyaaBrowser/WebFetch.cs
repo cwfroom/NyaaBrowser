@@ -142,9 +142,7 @@ namespace NyaaBrowser
             {
                 for (int i=0;i<tid.Length; i++)
                 {
-                    
-                    webclient.DownloadFile(normaldownloadURL + results[tid[i] * 3 + 1], path + "\\" + results[tid[i]*3] + ".torrent");
-                    
+                    webclient.DownloadFile(normaldownloadURL + results[tid[i] * 3 + 1], path + "\\" + results[tid[i]*3] + ".torrent");   
                 }
 
             }
