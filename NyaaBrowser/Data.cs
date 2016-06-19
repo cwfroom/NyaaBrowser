@@ -10,9 +10,15 @@ namespace NyaaBrowser
     public class Data
     {
         public bool isSukebei;
-        Dictionary<string, string> CategoryDic;
+        private Dictionary<string, string> CategoryDic;
         public string[] normalCategories;
         public string[] sukebeiCategories;
+        private Dictionary<string, int> normalUploaderDic;
+        private Dictionary<string, int> sukebeiUploaderDic;
+        public string[] normalUploaderStr;
+        public string[] sukebeiUploaderStr;
+
+        private string fileName = "NyaaSave.txt";
 
         public Data()
         {
@@ -52,56 +58,59 @@ namespace NyaaBrowser
             CategoryDic.Add("Real Life - Photobooks & Pictures", "8_31");
             CategoryDic.Add("Real Life - Videos", "8_30");
 
-            //default catagory values
-            normalCategories = new string[]{"All categories",
-                                            "Anime",
-                                            "Anime - Anime Music Video",
-                                            "Anime - English-translated Anime",
-                                            "Anime - Non-English-translated Anime",
-                                            "Anime - Raw Anime",
-                                            "Audio",
-                                            "Audio - Lossless Audio",
-                                            "Audio - Lossy Audio",
-                                            "Literature",
-                                            "Literature - English-translated Literature",
-                                            "Literature - Non-English-translated Literature",
-                                            "Literature - Raw Literature",
-                                            "Live Action",
-                                            "Live Action - English-translated Live Action",
-                                            "Live Action - Live Action Promotional Video",
-                                            "Live Action - Non-English-translated Live Action",
-                                            "Live Action - Raw Live Action",
-                                            "Pictures",
-                                            "Pictures - Graphics",
-                                            "Pictures - Photos",
-                                            "Software",
-                                            "Software - Applications",
-                                            "Software - Games"};
+            normalCategories = new string[24];
+            int index = 0;
 
+            for (int i = 0; i < 24; i++)
+            {
+                normalCategories[i] = CategoryDic.ElementAt(index++).Key;
+            }
+            sukebeiCategories = new string[9];
+            sukebeiCategories[0] = CategoryDic.ElementAt(0).Key;
+            for (int i = 1; i < 9; i++)
+            {
+                sukebeiCategories[i] = CategoryDic.ElementAt(index++).Key;
+            }
 
-            sukebeiCategories = new string[]{"All categories",
-                                             "Art",
-                                             "Art - Anime",
-                                             "Art - Doujinshi",
-                                             "Art - Games",
-                                             "Art - Pictures",
-                                             "Real Life",
-                                             "Real Life - Photobooks & Pictures",
-                                             "Real Life - Videos"
-                                            };
             //load files
+            normalUploaderDic = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            normalUploaderDic.Add("Ohys", 209171);
+
+
+            normalUploaderStr = new string[normalUploaderDic.Count];
+            for (int i = 0; i < normalUploaderDic.Count; i++)
+            {
+                normalUploaderStr[i] = normalUploaderDic.ElementAt(i).Key;
+            }
+
+            sukebeiUploaderDic = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
             
 
         }
 
-        public string categoryCode(string category)
+        public string GetCategoryCode(string category)
         {
             string result;
             CategoryDic.TryGetValue(category, out result);
-            return result;
-            
+            return result;    
        }
+
+        public int GetUploaderID(string uploader, bool isSukebei)
+        {
+            int result;
+            if (!isSukebei)
+            {
+                normalUploaderDic.TryGetValue(uploader, out result);
+            }else
+            {
+                sukebeiUploaderDic.TryGetValue(uploader, out result);
+            }
+            
+            return result;
+        }
+
+
         
         
     }

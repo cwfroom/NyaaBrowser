@@ -14,11 +14,17 @@ namespace NyaaBrowser
     public partial class MainScr : Form
     {
         private Client c;
+        private List<string> results;
+
 
         public MainScr(Client c)
         {
             this.c = c;
             InitializeComponent();
+
+            this.uploaderBox.AutoCompleteCustomSource.AddRange(new string[] {
+            "ohys"});
+
         }
 
         private void MainSrc_Load(object sender, EventArgs e)
@@ -26,6 +32,8 @@ namespace NyaaBrowser
             //load data to combo box
             this.categoryBox.Items.AddRange(c.data.normalCategories);
             this.categoryBox.SelectedIndex = 0;
+
+
         }
 
         private void sukebeiCheck_CheckedChanged(object sender, EventArgs e)
@@ -34,6 +42,7 @@ namespace NyaaBrowser
             this.categoryBox.Items.Clear();
             this.titleBox.Clear();
             this.uploaderBox.Clear();
+            this.resultsView.Items.Clear();
 
             if (!sukebeiCheck.Checked)
             {
@@ -69,13 +78,17 @@ namespace NyaaBrowser
 
             string[] filters = new string[3];
             //catagory
-            filters[0] = c.data.categoryCode(categoryBox.SelectedItem.ToString());
+            filters[0] = c.data.GetCategoryCode(categoryBox.SelectedItem.ToString());
             //uploader
-            filters[1] = uploaderBox.Text;
+            if (uploaderBox.Text.Length != 0)
+            {
+                filters[1] = c.data.GetUploaderID(uploaderBox.Text, sukebeiCheck.Checked).ToString();
+            }
+            
             //title
             filters[2] = titleBox.Text;
              
-            List<string> results = c.webFetch.fetch(filters,sukebeiCheck.Checked);
+            results = c.webFetch.fetch(filters,sukebeiCheck.Checked);
 
             for (int i = 0; i < results.Count; i+=3)
             {
@@ -88,5 +101,32 @@ namespace NyaaBrowser
 
            
         }
+
+        private void downloadButton_Click(object sender, EventArgs e)
+        {
+            if (results.Count == 0)
+            {
+                return;
+            }
+            
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            DialogResult folderResult = fbd.ShowDialog();
+
+
+            if (folderResult == DialogResult.OK)
+            {
+                string downloadPath = fbd.SelectedPath;
+                int[] tid = new int[resultsView.CheckedIndices.Count];
+                for (int i=0;i<resultsView.CheckedIndices.Count;i++)
+                {
+                    tid[i] = resultsView.CheckedIndices.IndexOf(i);
+                }
+                c.webFetch.DownloadTorrent(downloadPath, tid, sukebeiCheck.Checked);
+
+            }
+
+
+        }
+
     }
 }

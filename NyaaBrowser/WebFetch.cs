@@ -12,6 +12,9 @@ namespace NyaaBrowser
 
         string keyword;
         Dictionary<string, string> htmlCode;
+        string normaldownloadURL = "http://www.nyaa.se/?page=download&tid=";
+        string sukebeidownloadURL = "http://sukebei.nyaa.se/?page=download&tid=";
+        private List<string> results;
 
         public WebFetch()
         {
@@ -68,7 +71,7 @@ namespace NyaaBrowser
             byte[] htmlraw = webclient.DownloadData(url);
             string html = Encoding.UTF8.GetString(htmlraw);
             
-            List<string> results = new List<string>();
+            results = new List<string>();
             parsehtml(html,isSukebei,ref results);
 
             return results;
@@ -89,7 +92,7 @@ namespace NyaaBrowser
             }
             
             for(int i=0;i<temp.Length;i++){
-                //filter short strings to save time
+                //filter short strings to save time when keyword is used
                 if (temp[i].Length >= keyword.Length || temp[i].Length >= downloadLink.Length)
                 {
                      if (temp[i].Contains(keyword)){
@@ -131,5 +134,21 @@ namespace NyaaBrowser
             string[] temp =  str.Split(seperator);
             return temp[4];
         }
+
+        public void DownloadTorrent(string path, int[] tid, bool isSukebei)
+        {
+            WebClient webclient = new WebClient();
+            if (!isSukebei)
+            {
+                for (int i=0;i<tid.Length; i++)
+                {
+                    
+                    webclient.DownloadFile(normaldownloadURL + results[tid[i] * 3 + 1], path + "\\" + results[tid[i]*3] + ".torrent");
+                    
+                }
+
+            }
+        }
+
     }
 }

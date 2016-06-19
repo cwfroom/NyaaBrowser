@@ -50,10 +50,10 @@
             this.uploaderLabel = new System.Windows.Forms.Label();
             this.uploaderBox = new System.Windows.Forms.TextBox();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
+            this.downloadButton = new System.Windows.Forms.Button();
             this.resultsView = new System.Windows.Forms.ListView();
             this.fileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.downloadButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.filterGroupBox.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
@@ -202,7 +202,7 @@
             // titleBox
             // 
             this.titleBox.AutoCompleteCustomSource.AddRange(new string[] {
-            "Gochuumon wa Usagi Desu ka"});
+            "Gochuumon wa Usagi Desuka"});
             this.titleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.titleBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.titleBox.Location = new System.Drawing.Point(55, 48);
@@ -250,8 +250,6 @@
             // 
             // uploaderBox
             // 
-            this.uploaderBox.AutoCompleteCustomSource.AddRange(new string[] {
-            "ohys"});
             this.uploaderBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.uploaderBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.uploaderBox.Location = new System.Drawing.Point(552, 15);
@@ -271,8 +269,19 @@
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results";
             // 
+            // downloadButton
+            // 
+            this.downloadButton.Location = new System.Drawing.Point(313, 367);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(86, 23);
+            this.downloadButton.TabIndex = 2;
+            this.downloadButton.Text = "Download";
+            this.downloadButton.UseVisualStyleBackColor = true;
+            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
+            // 
             // resultsView
             // 
+            this.resultsView.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.resultsView.CheckBoxes = true;
             this.resultsView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fileName,
@@ -297,15 +306,6 @@
             // 
             this.fileSize.Text = "File Size";
             this.fileSize.Width = 90;
-            // 
-            // downloadButton
-            // 
-            this.downloadButton.Location = new System.Drawing.Point(313, 367);
-            this.downloadButton.Name = "downloadButton";
-            this.downloadButton.Size = new System.Drawing.Size(86, 23);
-            this.downloadButton.TabIndex = 2;
-            this.downloadButton.Text = "Download";
-            this.downloadButton.UseVisualStyleBackColor = true;
             // 
             // MainScr
             // 
