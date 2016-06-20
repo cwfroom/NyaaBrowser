@@ -19,6 +19,7 @@ namespace NyaaBrowser
         public string[] sukebeiUploaderStr;
 
         private string fileName = "NyaaSave.txt";
+        public string downloadPath = "D:\\Downloads";
 
         public Data()
         {
@@ -110,7 +111,7 @@ namespace NyaaBrowser
             return result;
         }
 
-
+        
         
         
     }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace NyaaBrowser
 {
@@ -33,6 +34,7 @@ namespace NyaaBrowser
             this.categoryBox.Items.AddRange(c.data.normalCategories);
             this.categoryBox.SelectedIndex = 0;
 
+            this.downloadPathLabel.Text = c.data.downloadPath;
 
         }
 
@@ -104,29 +106,38 @@ namespace NyaaBrowser
 
         private void downloadButton_Click(object sender, EventArgs e)
         {
-            if (results.Count == 0)
+            if (results!= null && results.Count == 0)
             {
                 return;
             }
+
+            string downloadPath = c.data.downloadPath;
+            int[] tid = new int[resultsView.CheckedIndices.Count];
+            for (int i=0;i<resultsView.CheckedIndices.Count;i++)
+            {
+                tid[i] = resultsView.CheckedIndices.IndexOf(i);
+            }
+            c.webFetch.DownloadTorrent(downloadPath, tid, sukebeiCheck.Checked);
             
+        }
+
+        private void selectFolderButton_Click(object sender, EventArgs e)
+        {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             DialogResult folderResult = fbd.ShowDialog();
 
-
             if (folderResult == DialogResult.OK)
             {
-                string downloadPath = fbd.SelectedPath;
-                int[] tid = new int[resultsView.CheckedIndices.Count];
-                for (int i=0;i<resultsView.CheckedIndices.Count;i++)
-                {
-                    tid[i] = resultsView.CheckedIndices.IndexOf(i);
-                }
-                c.webFetch.DownloadTorrent(downloadPath, tid, sukebeiCheck.Checked);
-
+               c.data.downloadPath = fbd.SelectedPath;
+                this.downloadPathLabel.Text = fbd.SelectedPath;
             }
-
-
         }
 
+        private void downloadPathLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Console.Write(c.data.downloadPath);
+            //Process.Start(@"D:\Downloads");
+            Process.Start(c.data.downloadPath);
+        }
     }
 }

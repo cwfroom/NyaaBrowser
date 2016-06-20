@@ -50,6 +50,8 @@
             this.uploaderLabel = new System.Windows.Forms.Label();
             this.uploaderBox = new System.Windows.Forms.TextBox();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
+            this.selectFolderButton = new System.Windows.Forms.Button();
+            this.downloadPathLabel = new System.Windows.Forms.LinkLabel();
             this.downloadButton = new System.Windows.Forms.Button();
             this.resultsView = new System.Windows.Forms.ListView();
             this.fileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -259,6 +261,8 @@
             // 
             // resultsGroupBox
             // 
+            this.resultsGroupBox.Controls.Add(this.selectFolderButton);
+            this.resultsGroupBox.Controls.Add(this.downloadPathLabel);
             this.resultsGroupBox.Controls.Add(this.downloadButton);
             this.resultsGroupBox.Controls.Add(this.resultsView);
             this.resultsGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -269,9 +273,30 @@
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results";
             // 
+            // selectFolderButton
+            // 
+            this.selectFolderButton.Location = new System.Drawing.Point(98, 367);
+            this.selectFolderButton.Name = "selectFolderButton";
+            this.selectFolderButton.Size = new System.Drawing.Size(86, 23);
+            this.selectFolderButton.TabIndex = 4;
+            this.selectFolderButton.Text = "Save To...";
+            this.selectFolderButton.UseVisualStyleBackColor = true;
+            this.selectFolderButton.Click += new System.EventHandler(this.selectFolderButton_Click);
+            // 
+            // downloadPathLabel
+            // 
+            this.downloadPathLabel.AutoSize = true;
+            this.downloadPathLabel.Location = new System.Drawing.Point(190, 370);
+            this.downloadPathLabel.Name = "downloadPathLabel";
+            this.downloadPathLabel.Size = new System.Drawing.Size(93, 16);
+            this.downloadPathLabel.TabIndex = 3;
+            this.downloadPathLabel.TabStop = true;
+            this.downloadPathLabel.Text = "D:\\Downloads";
+            this.downloadPathLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.downloadPathLabel_LinkClicked);
+            // 
             // downloadButton
             // 
-            this.downloadButton.Location = new System.Drawing.Point(313, 367);
+            this.downloadButton.Location = new System.Drawing.Point(6, 367);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(86, 23);
             this.downloadButton.TabIndex = 2;
@@ -328,6 +353,7 @@
             this.filterGroupBox.ResumeLayout(false);
             this.filterGroupBox.PerformLayout();
             this.resultsGroupBox.ResumeLayout(false);
+            this.resultsGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -359,6 +385,8 @@
         private System.Windows.Forms.ColumnHeader fileName;
         protected internal System.Windows.Forms.ColumnHeader fileSize;
         private System.Windows.Forms.Button downloadButton;
+        private System.Windows.Forms.LinkLabel downloadPathLabel;
+        private System.Windows.Forms.Button selectFolderButton;
     }
 }
 
