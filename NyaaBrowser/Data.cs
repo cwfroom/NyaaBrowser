@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace NyaaBrowser
 {
@@ -13,12 +14,17 @@ namespace NyaaBrowser
         private Dictionary<string, string> CategoryDic;
         public string[] normalCategories;
         public string[] sukebeiCategories;
-        private Dictionary<string, int> normalUploaderDic;
-        private Dictionary<string, int> sukebeiUploaderDic;
+        public Dictionary<string, string> normalUploaderDic;
+        public Dictionary<string, string> sukebeiUploaderDic;
         public string[] normalUploaderStr;
         public string[] sukebeiUploaderStr;
+        public Dictionary<string,string> normalTitlesDic;
+        public Dictionary<string, string> sukebeiTitlesDic;
+        public string[] normalTitlesStr;
+        public string[] sukebeiTitlesStr;
 
-        private string fileName = "NyaaSave.txt";
+
+        private string fileName = "NyaaData.txt";
         public string downloadPath = "D:\\Downloads";
 
         public Data()
@@ -74,8 +80,8 @@ namespace NyaaBrowser
             }
 
             //load files
-            normalUploaderDic = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-            normalUploaderDic.Add("Ohys", 209171);
+            normalUploaderDic = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            normalUploaderDic.Add("Ohys", "209171");
 
 
             normalUploaderStr = new string[normalUploaderDic.Count];
@@ -84,7 +90,7 @@ namespace NyaaBrowser
                 normalUploaderStr[i] = normalUploaderDic.ElementAt(i).Key;
             }
 
-            sukebeiUploaderDic = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            sukebeiUploaderDic = new Dictionary<string,string>(StringComparer.OrdinalIgnoreCase);
 
             
 
@@ -97,9 +103,9 @@ namespace NyaaBrowser
             return result;    
        }
 
-        public int GetUploaderID(string uploader, bool isSukebei)
+        public string GetUploaderID(string uploader, bool isSukebei)
         {
-            int result;
+            string result;
             if (!isSukebei)
             {
                 normalUploaderDic.TryGetValue(uploader, out result);
@@ -111,6 +117,14 @@ namespace NyaaBrowser
             return result;
         }
 
+        public void SaveFile()
+        {
+            string json;
+            json = JsonConvert.SerializeObject(downloadPath,Formatting.Indented);
+            json += JsonConvert.SerializeObject(normalUploaderDic,Formatting.Indented);
+
+            int j = 0;
+        }
         
         
         

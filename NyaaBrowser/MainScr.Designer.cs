@@ -44,7 +44,7 @@
             this.titleEditButton = new System.Windows.Forms.Button();
             this.titleLabel = new System.Windows.Forms.Label();
             this.titleBox = new System.Windows.Forms.TextBox();
-            this.providerEditButton = new System.Windows.Forms.Button();
+            this.uploaderEditButton = new System.Windows.Forms.Button();
             this.categoryLabel = new System.Windows.Forms.Label();
             this.categoryBox = new System.Windows.Forms.ComboBox();
             this.uploaderLabel = new System.Windows.Forms.Label();
@@ -114,7 +114,7 @@
             this.filterGroupBox.Controls.Add(this.titleEditButton);
             this.filterGroupBox.Controls.Add(this.titleLabel);
             this.filterGroupBox.Controls.Add(this.titleBox);
-            this.filterGroupBox.Controls.Add(this.providerEditButton);
+            this.filterGroupBox.Controls.Add(this.uploaderEditButton);
             this.filterGroupBox.Controls.Add(this.categoryLabel);
             this.filterGroupBox.Controls.Add(this.categoryBox);
             this.filterGroupBox.Controls.Add(this.uploaderLabel);
@@ -130,7 +130,7 @@
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(647, 75);
+            this.searchButton.Location = new System.Drawing.Point(687, 75);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(67, 32);
             this.searchButton.TabIndex = 14;
@@ -143,7 +143,7 @@
             this.customizeText.Enabled = false;
             this.customizeText.Location = new System.Drawing.Point(161, 80);
             this.customizeText.Name = "customizeText";
-            this.customizeText.Size = new System.Drawing.Size(480, 22);
+            this.customizeText.Size = new System.Drawing.Size(520, 22);
             this.customizeText.TabIndex = 13;
             // 
             // customizeBox
@@ -212,14 +212,15 @@
             this.titleBox.Size = new System.Drawing.Size(395, 22);
             this.titleBox.TabIndex = 6;
             // 
-            // providerEditButton
+            // uploaderEditButton
             // 
-            this.providerEditButton.Location = new System.Drawing.Point(687, 15);
-            this.providerEditButton.Name = "providerEditButton";
-            this.providerEditButton.Size = new System.Drawing.Size(67, 26);
-            this.providerEditButton.TabIndex = 5;
-            this.providerEditButton.Text = "Edit";
-            this.providerEditButton.UseVisualStyleBackColor = true;
+            this.uploaderEditButton.Location = new System.Drawing.Point(687, 13);
+            this.uploaderEditButton.Name = "uploaderEditButton";
+            this.uploaderEditButton.Size = new System.Drawing.Size(67, 26);
+            this.uploaderEditButton.TabIndex = 5;
+            this.uploaderEditButton.Text = "Edit";
+            this.uploaderEditButton.UseVisualStyleBackColor = true;
+            this.uploaderEditButton.Click += new System.EventHandler(this.uploaderEditButton_Click);
             // 
             // categoryLabel
             // 
@@ -368,7 +369,7 @@
         private System.Windows.Forms.GroupBox filterGroupBox;
         private System.Windows.Forms.Label uploaderLabel;
         private System.Windows.Forms.TextBox uploaderBox;
-        private System.Windows.Forms.Button providerEditButton;
+        private System.Windows.Forms.Button uploaderEditButton;
         private System.Windows.Forms.Label categoryLabel;
         private System.Windows.Forms.ComboBox categoryBox;
         private System.Windows.Forms.Button titleEditButton;

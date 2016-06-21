@@ -84,7 +84,7 @@ namespace NyaaBrowser
             //uploader
             if (uploaderBox.Text.Length != 0)
             {
-                filters[1] = c.data.GetUploaderID(uploaderBox.Text, sukebeiCheck.Checked).ToString();
+                filters[1] = c.data.GetUploaderID(uploaderBox.Text, sukebeiCheck.Checked);
             }
             
             //title
@@ -135,9 +135,14 @@ namespace NyaaBrowser
 
         private void downloadPathLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Console.Write(c.data.downloadPath);
-            //Process.Start(@"D:\Downloads");
             Process.Start(c.data.downloadPath);
+        }
+
+        private void uploaderEditButton_Click(object sender, EventArgs e)
+        {
+            string[] uploaderTitles = new string[2]{ "Uploader", "ID" };
+            Form uploaderEdit = new EditScr(c, uploaderTitles, NyaaBrowser.EditScr.EditDic.Uploaders);
+            uploaderEdit.ShowDialog();
         }
     }
 }
