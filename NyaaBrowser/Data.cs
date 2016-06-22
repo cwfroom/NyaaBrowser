@@ -12,6 +12,7 @@ namespace NyaaBrowser
     //load config file and save data
     public class Data
     {
+        private Client c;
         [JsonIgnore] public bool isSukebei;
         private Dictionary<string, string> CategoryDic;
         [JsonIgnore] public string[] normalCategories;
@@ -29,8 +30,9 @@ namespace NyaaBrowser
         private string fileName = "NyaaData.txt";
         [JsonProperty(PropertyName = "DownloadPath")] public string downloadPath = "D:\\Downloads";
 
-        public Data()
+        public Data(Client c)
         {
+            this.c = c;
             isSukebei = false;
             //generate category dictionary
             CategoryDic = new Dictionary<string, string>();
@@ -67,9 +69,9 @@ namespace NyaaBrowser
             CategoryDic.Add("Real Life - Photobooks & Pictures", "8_31");
             CategoryDic.Add("Real Life - Videos", "8_30");
 
+            //populate category codes
             normalCategories = new string[24];
             int index = 0;
-
             for (int i = 0; i < 24; i++)
             {
                 normalCategories[i] = CategoryDic.ElementAt(index++).Key;
@@ -81,19 +83,16 @@ namespace NyaaBrowser
                 sukebeiCategories[i] = CategoryDic.ElementAt(index++).Key;
             }
 
-            //load files
+            //create dictionaties and populate by loading file
             normalUploaderDic = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            normalUploaderDic.Add("Ohys", "209171");
-
-
-            normalUploaderStr = new string[normalUploaderDic.Count];
-            for (int i = 0; i < normalUploaderDic.Count; i++)
-            {
-                normalUploaderStr[i] = normalUploaderDic.ElementAt(i).Key;
-            }
-
-            sukebeiUploaderDic = new Dictionary<string,string>(StringComparer.OrdinalIgnoreCase);
-
+            sukebeiUploaderDic = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            normalTitlesDic = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            sukebeiTitlesDic = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            LoadFile();
+            
+            UpdateAllStr();
+            
+            
         }
 
         public string GetCategoryCode(string category)
@@ -119,16 +118,47 @@ namespace NyaaBrowser
 
         public void SaveFile()
         {
-            string json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(this, Formatting.Indented, 
+                new JsonSerializerSettings {
+                    NullValueHandling = NullValueHandling.Ignore
+                });
             File.WriteAllText(fileName, json);   
         }
 
         public void LoadFile()
         {
-            //string json = 
+            string json = null;
+            try
+            {
+                json = File.ReadAllText(fileName);
+            }catch(IOException ioe)
+            {
+                c.mainScr.ShowMessage(ioe.ToString());
+                
+            }
+            JsonConvert.PopulateObject(json, this);
+            
         }
-        
-        
+
+        //since the changes in dictionary can be unordered, it's impossible to simply resize the array
+        public void UpdateSingleStr(ref Dictionary<string, string> dic, ref string[] str)
+        {
+            str = new string[dic.Count];
+            for (int i = 0; i < dic.Count; i++)
+            {
+                str[i] = dic.ElementAt(i).Key;
+            }
+        }
+
+        public void UpdateAllStr()
+        {
+            UpdateSingleStr(ref normalUploaderDic, ref normalUploaderStr);
+            UpdateSingleStr(ref sukebeiUploaderDic, ref sukebeiUploaderStr);
+            UpdateSingleStr(ref normalTitlesDic, ref normalTitlesStr);
+            UpdateSingleStr(ref sukebeiTitlesDic, ref sukebeiTitlesStr);
+        }
+
+
         
     }
 }

@@ -15,7 +15,7 @@ namespace NyaaBrowser
 
         public Client()
         {
-            data = new Data();
+            data = new Data(this);
             webFetch = new WebFetch();
 
             Application.EnableVisualStyles();

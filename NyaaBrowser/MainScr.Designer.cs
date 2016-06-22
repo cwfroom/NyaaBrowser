@@ -191,6 +191,7 @@
             this.titleEditButton.TabIndex = 8;
             this.titleEditButton.Text = "Edit";
             this.titleEditButton.UseVisualStyleBackColor = true;
+            this.titleEditButton.Click += new System.EventHandler(this.titleEditButton_Click);
             // 
             // titleLabel
             // 
@@ -203,8 +204,6 @@
             // 
             // titleBox
             // 
-            this.titleBox.AutoCompleteCustomSource.AddRange(new string[] {
-            "Gochuumon wa Usagi Desuka"});
             this.titleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.titleBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.titleBox.Location = new System.Drawing.Point(55, 48);

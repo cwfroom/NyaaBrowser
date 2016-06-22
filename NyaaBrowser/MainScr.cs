@@ -22,10 +22,6 @@ namespace NyaaBrowser
         {
             this.c = c;
             InitializeComponent();
-
-            this.uploaderBox.AutoCompleteCustomSource.AddRange(new string[] {
-            "ohys"});
-
         }
 
         private void MainSrc_Load(object sender, EventArgs e)
@@ -35,8 +31,42 @@ namespace NyaaBrowser
             this.categoryBox.SelectedIndex = 0;
 
             this.downloadPathLabel.Text = c.data.downloadPath;
+            UpdateUploaderAutoComplete();
+            UpdateTitleAutoComplete();
 
         }
+
+        private void UpdateUploaderAutoComplete() {
+            c.data.UpdateSingleStr(ref c.data.normalUploaderDic, ref c.data.normalUploaderStr);
+            c.data.UpdateSingleStr(ref c.data.sukebeiUploaderDic, ref c.data.sukebeiUploaderStr);
+            if (!sukebeiCheck.Checked)
+            {
+                uploaderBox.AutoCompleteCustomSource.Clear();
+                uploaderBox.AutoCompleteCustomSource.AddRange(c.data.normalUploaderStr);
+            }
+            else
+            {
+                uploaderBox.AutoCompleteCustomSource.Clear();
+                uploaderBox.AutoCompleteCustomSource.AddRange(c.data.sukebeiUploaderStr);
+            }
+        }
+
+        private void UpdateTitleAutoComplete()
+        {
+            c.data.UpdateSingleStr(ref c.data.normalTitlesDic, ref c.data.normalTitlesStr);
+            c.data.UpdateSingleStr(ref c.data.sukebeiTitlesDic, ref c.data.sukebeiTitlesStr);
+            if (!sukebeiCheck.Checked)
+            {
+                titleBox.AutoCompleteCustomSource.Clear();
+                titleBox.AutoCompleteCustomSource.AddRange(c.data.normalTitlesStr);
+            }
+            else
+            {
+                titleBox.AutoCompleteCustomSource.Clear();
+                titleBox.AutoCompleteCustomSource.AddRange(c.data.sukebeiTitlesStr);
+            }
+        }
+
 
         private void sukebeiCheck_CheckedChanged(object sender, EventArgs e)
         {
@@ -56,6 +86,9 @@ namespace NyaaBrowser
                 this.categoryBox.Items.AddRange(c.data.sukebeiCategories);
                 this.categoryBox.SelectedIndex = 0;
             }
+
+            UpdateUploaderAutoComplete();
+            UpdateTitleAutoComplete();
         }
 
         private void customizeBox_CheckedChanged(object sender, EventArgs e)
@@ -141,8 +174,25 @@ namespace NyaaBrowser
         private void uploaderEditButton_Click(object sender, EventArgs e)
         {
             string[] uploaderTitles = new string[2]{ "Uploader", "ID" };
-            Form uploaderEdit = new EditScr(c, uploaderTitles, NyaaBrowser.EditScr.EditDic.Uploaders);
+            EditScr uploaderEdit = new EditScr(c, uploaderTitles, NyaaBrowser.EditScr.EditDic.Uploaders);
             uploaderEdit.ShowDialog();
+            UpdateUploaderAutoComplete();
         }
+
+        private void titleEditButton_Click(object sender, EventArgs e)
+        {
+            string[] titleTitles = new string[2] { "Title EN", "Title JP" };
+            EditScr titleEdit = new EditScr(c, titleTitles, NyaaBrowser.EditScr.EditDic.Titles);
+            titleEdit.ShowDialog();
+            UpdateTitleAutoComplete();
+            
+        }
+
+        public void ShowMessage(string msg)
+        {
+            MessageBox.Show(this, msg,"Error", MessageBoxButtons.OK);
+        }
+
+
     }
 }

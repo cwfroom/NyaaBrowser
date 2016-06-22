@@ -95,7 +95,7 @@ namespace NyaaBrowser
                 //filter short strings to save time when keyword is used
                 if (temp[i].Length >= keyword.Length || temp[i].Length >= downloadLink.Length)
                 {
-                     if (temp[i].Contains(keyword)){
+                     //if (temp[i].Contains(keyword)){ //canceled keyword restriction
                         //save keyword
                         //download link should be saved at [+7]
                         //size should be at [+16]    
@@ -112,7 +112,7 @@ namespace NyaaBrowser
 
                         }
 
-                    }
+                    //}
                 }
             }
 

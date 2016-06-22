@@ -157,6 +157,9 @@ namespace NyaaBrowser
 
         public void updateEntry(string[] values, bool edit)
         {
+
+
+
             //update list
             bool keyChanged = false;
             if (!edit)
@@ -166,42 +169,48 @@ namespace NyaaBrowser
                 //keychange remains false when adding new item
             }else
             {
+                //if nothing changed don't bother updating
+                if (valueView.SelectedItems[0].SubItems[0].Text == values[0] && valueView.SelectedItems[0].SubItems[1].Text == values[1])
+                    return;
                 keyChanged = (valueView.SelectedItems[0].SubItems[0].Text != values[0]);
+                //update the actual dictionary
+                //because there's no way to return by referenece have to use bulky switch inline
+                switch (currentDicType)
+                {
+                    case EditDic.Uploaders:
+                        if (!this.sukebeiCheck.Checked)
+                        {
+                            if (keyChanged) c.data.normalUploaderDic.Remove(valueView.SelectedItems[0].SubItems[0].Text);
+                            UpdateOrAddtoDic(ref c.data.normalUploaderDic, values);
+                        }
+                        else
+                        {
+                            if (keyChanged) c.data.sukebeiUploaderDic.Remove(valueView.SelectedItems[0].SubItems[0].Text);
+                            UpdateOrAddtoDic(ref c.data.sukebeiUploaderDic, values);
+                        }
+                        break;
+
+                    case EditDic.Titles:
+                        if (!this.sukebeiCheck.Checked)
+                        {
+                            if (keyChanged) c.data.normalTitlesDic.Remove(valueView.SelectedItems[0].SubItems[0].Text);
+                            UpdateOrAddtoDic(ref c.data.normalTitlesDic, values);
+                        }
+                        else
+                        {
+                            if (keyChanged) c.data.sukebeiTitlesDic.Remove(valueView.SelectedItems[0].SubItems[0].Text);
+                            UpdateOrAddtoDic(ref c.data.sukebeiTitlesDic, values);
+                        }
+
+                        break;
+                }
+
                 valueView.SelectedItems[0].SubItems[0].Text = values[0];
                 valueView.SelectedItems[0].SubItems[1].Text = values[1];
             }
             
-            //update the actual dictionary
-            //because there's no way to return by referenece have to use bulky switch inline
-            switch (currentDicType)
-            {
-                case EditDic.Uploaders:
-                    if (!this.sukebeiCheck.Checked)
-                    {
-                        if (keyChanged) c.data.normalUploaderDic.Remove(valueView.SelectedItems[0].SubItems[0].Text);
-                        UpdateOrAddtoDic(ref c.data.normalUploaderDic, values);
-                    }
-                    else
-                    {
-                        if (keyChanged) c.data.sukebeiUploaderDic.Remove(valueView.SelectedItems[0].SubItems[0].Text);
-                        UpdateOrAddtoDic(ref c.data.sukebeiUploaderDic, values);
-                    }
-                    break;
 
-                case EditDic.Titles:
-                    if (!this.sukebeiCheck.Checked)
-                    {
-                        if (keyChanged) c.data.normalTitlesDic.Remove(valueView.SelectedItems[0].SubItems[0].Text);
-                        UpdateOrAddtoDic(ref c.data.normalTitlesDic, values);
-                    }
-                    else
-                    {
-                        if (keyChanged) c.data.sukebeiTitlesDic.Remove(valueView.SelectedItems[0].SubItems[0].Text);
-                        UpdateOrAddtoDic(ref c.data.sukebeiTitlesDic, values);
-                    }
 
-                    break;
-            }
         }
 
         //private void removeEntry(ref Dictionary<string, string> dic, string[] values)
