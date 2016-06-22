@@ -3,29 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using Newtonsoft.Json;
+
 
 namespace NyaaBrowser
 {
     //load config file and save data
     public class Data
     {
-        public bool isSukebei;
+        [JsonIgnore] public bool isSukebei;
         private Dictionary<string, string> CategoryDic;
-        public string[] normalCategories;
-        public string[] sukebeiCategories;
-        public Dictionary<string, string> normalUploaderDic;
-        public Dictionary<string, string> sukebeiUploaderDic;
-        public string[] normalUploaderStr;
-        public string[] sukebeiUploaderStr;
-        public Dictionary<string,string> normalTitlesDic;
-        public Dictionary<string, string> sukebeiTitlesDic;
-        public string[] normalTitlesStr;
-        public string[] sukebeiTitlesStr;
+        [JsonIgnore] public string[] normalCategories;
+        [JsonIgnore] public string[] sukebeiCategories;
+        [JsonProperty(PropertyName = "NormalUploaders")] public Dictionary<string, string> normalUploaderDic;
+        [JsonProperty(PropertyName = "SukebeiUploaders")] public Dictionary<string, string> sukebeiUploaderDic;
+        [JsonIgnore] public string[] normalUploaderStr;
+        [JsonIgnore] public string[] sukebeiUploaderStr;
+        [JsonProperty(PropertyName = "NormalTitles")] public Dictionary<string,string> normalTitlesDic;
+        [JsonProperty(PropertyName = "SukebeiTitles")] public Dictionary<string, string> sukebeiTitlesDic;
+        [JsonIgnore] public string[] normalTitlesStr;
+        [JsonIgnore] public string[] sukebeiTitlesStr;
 
 
         private string fileName = "NyaaData.txt";
-        public string downloadPath = "D:\\Downloads";
+        [JsonProperty(PropertyName = "DownloadPath")] public string downloadPath = "D:\\Downloads";
 
         public Data()
         {
@@ -92,8 +94,6 @@ namespace NyaaBrowser
 
             sukebeiUploaderDic = new Dictionary<string,string>(StringComparer.OrdinalIgnoreCase);
 
-            
-
         }
 
         public string GetCategoryCode(string category)
@@ -119,11 +119,13 @@ namespace NyaaBrowser
 
         public void SaveFile()
         {
-            string json;
-            json = JsonConvert.SerializeObject(downloadPath,Formatting.Indented);
-            json += JsonConvert.SerializeObject(normalUploaderDic,Formatting.Indented);
+            string json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            File.WriteAllText(fileName, json);   
+        }
 
-            int j = 0;
+        public void LoadFile()
+        {
+            //string json = 
         }
         
         

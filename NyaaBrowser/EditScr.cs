@@ -80,7 +80,7 @@ namespace NyaaBrowser
         private void saveButton_Click(object sender, EventArgs e)
         {
             //save to file
-
+            c.data.SaveFile();
             this.Close();
         }
 
@@ -89,7 +89,7 @@ namespace NyaaBrowser
             this.Close();
         }
 
-        private void EditScr_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void OnClosing(object sender, CancelEventArgs e)
         {
             DialogResult result = MessageBox.Show(this, "Changes will be not saved to file!", "Warning", MessageBoxButtons.OKCancel);
             if (result == DialogResult.OK)
